@@ -125,7 +125,7 @@ const dailyTrade = async (
   let tokenIndex = getRandomIndex(tokenAnswer);
   let tokenTrade = tokenAnswer[tokenIndex];
   setTimeout(async () => {
-    times = getRandomInRange(tradeTimesArr);
+    let times = tradeTimesArr[getRandomIndex(tradeTimesArr)];
     let tradeActual = moneyAnserArr;
     if (now.getUTCDay() !== 3) {
       // Wednesday in UTC
