@@ -130,6 +130,8 @@ const dailyTrade = async (
     if (now.getUTCDay() !== 3) {
       // Wednesday in UTC
       tradeActual = moneyAnserArr.map((num) => num * 0.1); // Random small volume
+    } else {
+      tradeActual = moneyAnserArr.map((num) => num * 0.2); // Random big volume
     }
     await init(client, tokenTrade, randomAnserArr, tradeActual, times);
     dailyTrade(
