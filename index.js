@@ -101,13 +101,6 @@ function delay(ms) {
 
   let tokenIndexFirst = getRandomIndex(tokenAnswer);
   let tokenTradeFirst = tokenAnswer[tokenIndexFirst];
-  await init(
-    client,
-    tokenTradeFirst,
-    randomAnserArr,
-    moneyAnserArr.map((num) => num * 0.1),
-    tradeTimesArr[1]
-  );
   dailyTrade(client, tokenAnswer, randomAnserArr, moneyAnserArr, tradeTimesArr);
 })();
 
@@ -128,10 +121,10 @@ const dailyTrade = async (
     let times = tradeTimesArr[getRandomIndex(tradeTimesArr)];
     let tradeActual = moneyAnserArr;
     if (now.getUTCDay() !== 3) {
-      // Wednesday in UTC
-      tradeActual = moneyAnserArr.map((num) => num * 0.1); // Random small volume
+      // 此处为特定交易日的星期数（代码示例为星期三）
+      tradeActual = moneyAnserArr.map((num) => num * 0.1); // 日常交易时间的交易量比例
     } else {
-      tradeActual = moneyAnserArr.map((num) => num * 0.2); // Random big volume
+      tradeActual = moneyAnserArr.map((num) => num * 0.2); // 特定交易日的交易量比例
     }
     await init(client, tokenTrade, randomAnserArr, tradeActual, times);
     dailyTrade(
