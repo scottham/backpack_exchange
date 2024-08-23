@@ -2,6 +2,8 @@
 
 ## 初始步骤
 
+根据服务器系统安装 nvm
+
 Backpack 交易所注册：[Refer code: mvp](https://backpack.exchange/refer/mvp)，通过 [kyc 认证](https://x.com/Abao_backpack/status/1823966202244554865)
 
 在交易所设置页面创建 API Keys
@@ -11,6 +13,8 @@ Backpack 交易所注册：[Refer code: mvp](https://backpack.exchange/refer/mvp
 ## 运行命令：
 
 运行<code>git clone https://github.com/Scotthamy/backpack_exchange</code>把代码克隆到本地服务器
+
+进入目录<code>cd backpack_exchange</code>，安装 node<code>nvm install 20</code>
 
 先运行 <code>npm install</code>
 
