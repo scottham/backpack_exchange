@@ -122,9 +122,9 @@ const dailyTrade = async (
     let tradeActual = moneyAnserArr;
     if (now.getUTCDay() !== 3) {
       // 此处为特定交易日的星期数（代码示例为星期三）
-      tradeActual = moneyAnserArr.map((num) => num * 0.1); // 日常交易时间的交易量比例
+      tradeActual = moneyAnserArr.map((num) => num * 0.9); // 日常交易时间的交易量比例
     } else {
-      tradeActual = moneyAnserArr.map((num) => num * 0.2); // 特定交易日的交易量比例
+      tradeActual = moneyAnserArr.map((num) => num * 0.95); // 特定交易日的交易量比例
     }
     await init(client, tokenTrade, randomAnserArr, tradeActual, times);
     dailyTrade(
@@ -179,11 +179,23 @@ const init = async (client, token, random, money, times) => {
           userbalance[item].symbol = `USDC`;
           return;
         }
-        userbalance[item].value =
-          userbalance[item].available *
-          tokenPriceList.find((token) => token.symbol == `${item}_USDC`)
-            .lastPrice;
-        userbalance[item].symbol = `${item}_USDC`;
+
+        // 找到匹配的代币价格信息
+        const tokenPrice = tokenPriceList.find(
+          (token) => token.symbol == `${item}_USDC`
+        );
+
+        // 检查是否找到了匹配项
+        if (tokenPrice) {
+          userbalance[item].value =
+            userbalance[item].available * tokenPrice.lastPrice;
+          userbalance[item].symbol = `${item}_USDC`;
+        } else {
+          // 处理未找到匹配项的情况
+          console.log(`警告: 未找到代币 ${item}_USDC 的价格信息`);
+          userbalance[item].value = 0; // 或其他适当的默认值
+          userbalance[item].symbol = `${item}_USDC`;
+        }
       });
       //当前账号价值最大的币种名字 跳过symbol为USDC的币种
       let maxToken = Object.keys(userbalance)
